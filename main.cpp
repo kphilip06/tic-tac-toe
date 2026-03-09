@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include "src/tictactoe.hpp"
+#include "src/play_game.hpp"
 
 int main() {
-  // Your driver program goes here
+    std::cout << "\t\t Welcome to Tic-Tac-Toe!" << std::endl;
+    play_game();
 }
