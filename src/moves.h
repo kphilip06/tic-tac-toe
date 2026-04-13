@@ -1,5 +1,9 @@
-#pragma once
-#include <string>
+#ifndef MOVES_HPP
+#define MOVES_HPP
 
-bool is_valid_move(const std::string board[], int position);
-bool make_move(std::string board[], int position, const std::string& player_mark);
+#include <vector>
+
+int getHumanMove(const std::vector<char>& board);
+int getComputerMove(const std::vector<char>& board);
+
+#endif

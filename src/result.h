@@ -1,4 +1,8 @@
-#pragma once
-#include <string>
-bool has_winner(const std::string board[]);
-bool is_draw(const std::string board[]);
+#ifndef RESULT_HPP
+#define RESULT_HPP
+
+#include <vector>
+
+char checkWinner(const std::vector<char>& board);
+
+#endif

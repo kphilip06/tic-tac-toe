@@ -3,21 +3,44 @@
 //
 
 #include "moves.h"
+#include <iostream>
+#include <limits>
 
-bool is_valid_move(const std::string board[], int position) {
-    if (position < 1 || position > 9) {
-        return false;
+using namespace std;
+
+int getHumanMove(const vector<char>& board) {
+    int move;
+
+    while (true) {
+        cout << "Enter a position (1-9): ";
+
+        if (!(cin >> move)) {
+            cout << "Invalid input. Enter a number.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+
+        move -= 1;
+
+        if (move < 0 || move > 8) {
+            cout << "Out of range. Try again.\n";
+            continue;
+        }
+
+        if (board[move] != ' ') {
+            cout << "Spot taken. Try again.\n";
+            continue;
+        }
+
+        return move;
     }
-
-    return board[position - 1] == std::to_string(position);
 }
 
-
-bool make_move(std::string board[], int position, const std::string& player_mark) {
-    if (!is_valid_move(board, position)) {
-        return false;
+int getComputerMove(const vector<char>& board) {
+    for (int i = 0; i < 9; i++) {
+        if (board[i] == ' ')
+            return i;
     }
-
-    board[position - 1] = player_mark;
-    return true;
+    return -1;
 }

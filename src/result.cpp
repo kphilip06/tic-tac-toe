@@ -1,39 +1,20 @@
-#include "moves.h"
-#include <string>
 #include "result.h"
 
-
-bool has_winner(const std::string board[]) {
-    const int winning_lines[8][3] = {
-        {0, 1, 2},
-        {3, 4, 5},
-        {6, 7, 8},
-        {0, 3, 6},
-        {1, 4, 7},
-        {2, 5, 8},
-        {0, 4, 8},
-        {2, 4, 6}
+char checkWinner(const std::vector<char>& b) {
+    int wins[8][3] = {
+        {0,1,2},{3,4,5},{6,7,8},
+        {0,3,6},{1,4,7},{2,5,8},
+        {0,4,8},{2,4,6}
     };
 
-    for (const auto& line : winning_lines) {
-        const std::string& first = board[line[0]];
-        const std::string& second = board[line[1]];
-        const std::string& third = board[line[2]];
-
-        if (first == second && second == third) {
-            return true;
-        }
+    for (auto& w : wins) {
+        if (b[w[0]] != ' ' && b[w[0]] == b[w[1]] && b[w[1]] == b[w[2]])
+            return b[w[0]];
     }
 
-    return false;
-}
+    for (char c : b)
+        if (c == ' ')
+            return ' ';
 
-bool is_draw(const std::string board[]) {
-    for (int i = 0; i < 9; i++) {
-        if (board[i] == std::to_string(i + 1)) {
-            return false;
-        }
-    }
-
-    return !has_winner(board);
+    return 'T';
 }

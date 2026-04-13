@@ -29,7 +29,8 @@ add_executable(main
         src/moves.cpp
         src/result.cpp
         src/reset.cpp
-        src/player_prompts.cpp
+        src/menu.hpp
+        src/menu.cpp
 )
 
 target_link_libraries(tictactoe_test PRIVATE Catch2::Catch2WithMain)

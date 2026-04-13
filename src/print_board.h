@@ -1,4 +1,8 @@
-#pragma once
-#include <string>
+#ifndef PRINT_BOARD_HPP
+#define PRINT_BOARD_HPP
 
-void print_board(const std::string board[]);
+#include <vector>
+
+void printBoard(const std::vector<char>& board);
+
+#endif

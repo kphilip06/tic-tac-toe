@@ -1,42 +1,48 @@
-#include "player_prompts.h"
+#include "play_game.hpp"
+#include "print_board.h"
 #include "moves.h"
 #include "result.h"
-#include "reset.h"
-#include "print_board.h"
+#include <vector>
 #include <iostream>
-#include <string>
 
-void play_game() {
-    std::string board[9];
-    bool play_again = true;
+using namespace std;
 
-    while (play_again) {
-        reset_board(board);
-        std::string current_player = "X";
+void playGame(bool vsComputer, bool computerFirst) {
+    vector<char> board(9, ' ');
+    char human = 'X';
+    char computer = 'O';
 
-        print_board(board);
+    bool humanTurn = !(vsComputer && computerFirst);
 
-        while (true) {
-            int position = get_player_move(board, current_player);
-            make_move(board, position, current_player);
+    while (true) {
+        printBoard(board);
 
-            print_board(board);
-
-            if (has_winner(board)) {
-                std::cout << "Player " << current_player << " wins!" << std::endl;
-                break;
+        if (!vsComputer) {
+            cout << (humanTurn ? "Player X turn:\n" : "Player O turn:\n");
+            int move = getHumanMove(board);
+            board[move] = humanTurn ? 'X' : 'O';
+        } else {
+            if (humanTurn) {
+                cout << "Human turn:\n";
+                int move = getHumanMove(board);
+                board[move] = human;
+            } else {
+                cout << "Computer turn:\n";
+                int move = getComputerMove(board);
+                board[move] = computer;
             }
-
-            if (is_draw(board)) {
-                std::cout << "The game is a draw!" << std::endl;
-                break;
-            }
-
-            current_player = (current_player == "X") ? "O" : "X";
         }
 
-        play_again = ask_to_play_again();
-    }
+        char result = checkWinner(board);
+        if (result != ' ') {
+            printBoard(board);
+            if (result == 'T')
+                cout << "It's a tie!\n";
+            else
+                cout << result << " wins!\n";
+            break;
+        }
 
-    std::cout << "Thanks for playing Tic-Tac-Toe!" << std::endl;
+        humanTurn = !humanTurn;
+    }
 }
