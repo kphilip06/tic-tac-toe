@@ -17,20 +17,16 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(tictactoe_test
         tests/tictactoe_test.cpp
-        src/moves.cpp
-        src/result.cpp
-        src/reset.cpp
+        src/interface.cpp
+        src/board_logic.cpp
+        src/game_moves.cpp
 )
 
 add_executable(main
         main.cpp
-        src/play_game.cpp
-        src/print_board.cpp
-        src/moves.cpp
-        src/result.cpp
-        src/reset.cpp
-        src/menu.hpp
-        src/menu.cpp
+        src/game_moves.cpp
+        src/interface.cpp
+        src/board_logic.cpp
 )
 
 target_link_libraries(tictactoe_test PRIVATE Catch2::Catch2WithMain)

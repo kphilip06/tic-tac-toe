@@ -1,5 +1,5 @@
-#ifndef RESULT_HPP
-#define RESULT_HPP
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 #include <vector>
 
